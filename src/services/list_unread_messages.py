@@ -1,3 +1,6 @@
+from utils.path_bootstrap import ensure_src_on_path
+ensure_src_on_path()
+
 from typing import List, Dict
 
 from auth.get_gmail_service import get_gmail_service

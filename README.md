@@ -7,3 +7,9 @@ A demo project to showcase the integration of MCP server to Claude Desktop
 * ./install-claude.sh
 
 * Launch the claude desktop with the command claude-desktop
+
+## use module
+sys.path.append(str(Path(__file__).resolve().parent.parent))
+
+
+

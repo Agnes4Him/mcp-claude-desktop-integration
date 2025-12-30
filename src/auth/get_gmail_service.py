@@ -1,8 +1,13 @@
+from utils.path_bootstrap import ensure_src_on_path
+ensure_src_on_path()
+
 from googleapiclient.discovery import build
 from google.oauth2.credentials import Credentials
 
-GMAIL_SCOPES = ["https://www.googleapis.com/auth/gmail.modify"]
-
+GMAIL_SCOPES = [
+    "https://www.googleapis.com/auth/gmail.readonly",
+    "https://www.googleapis.com/auth/gmail.compose",
+]
 
 def get_gmail_service():
     """
