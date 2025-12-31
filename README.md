@@ -1,15 +1,26 @@
 # mcp-claude-desktop-integration
-A demo project to showcase the integration of MCP server to Claude Desktop 
+A project to demonstarte the integration of MCP server with Claude Desktop 
 
-## Installing Claude Desktop on Linux
-* chmod +x install-claude.sh
+## Solutions
+* Prompt:
+I want you to fetch unread emails from my mail and output their summaries, ordering them based on recency. Then create drafts of replies to the email.
 
-* ./install-claude.sh
+## `claude_desktop_config.json` file
+{
+    "mcpServers": {
+        "Emails": {
+            "command": "uv",
+            "args": [
+                "--directory",
+                "/home/agnes/Documents/personal/projects/mcp-claude-desktop-integration/",
+                "run",
+                "server.py"
+            ]
+        }
+    }
+}
 
-* Launch the claude desktop with the command claude-desktop
-
-## use module
-sys.path.append(str(Path(__file__).resolve().parent.parent))
+## Steps to run:
 
 
 

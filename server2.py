@@ -1,29 +1,40 @@
 from mcp.server.fastmcp import FastMCP
 from typing import List, Dict
+import os
 import base64
 from email.mime.text import MIMEText
 
 # Gmail imports (can be swapped for another provider)
 from googleapiclient.discovery import build
 from google.oauth2.credentials import Credentials
+# from google_auth_oauthlib.flow import InstalledAppFlow
+from google.auth.transport.requests import Request
 
 
 app = FastMCP("email-mcp-server")
 
+GMAIL_SCOPES = [
+    "https://www.googleapis.com/auth/gmail.readonly",
+    "https://www.googleapis.com/auth/gmail.compose",
+]
 
-# -------------------------------------------------------------------
-# Gmail helper functions
-# -------------------------------------------------------------------
+TOKEN_FILE = "src/auth/token.json"
 
-def get_gmail_service() -> object:
-    """
-    Returns an authenticated Gmail service.
-    Credentials loading is intentionally abstract.
-    """
+
+def get_gmail_service():
+    if not os.path.exists(TOKEN_FILE):
+        raise RuntimeError(
+            "token.json not found. Run one-time auth locally first."
+        )
+
     creds = Credentials.from_authorized_user_file(
-        "token.json",
-        scopes=["https://www.googleapis.com/auth/gmail.modify"]
+        TOKEN_FILE,
+        scopes=GMAIL_SCOPES
     )
+
+    if creds.expired and creds.refresh_token:
+        creds.refresh(Request())
+
     return build("gmail", "v1", credentials=creds)
 
 
@@ -44,9 +55,8 @@ def decode_body(payload: Dict) -> str:
 
     return ""
 
-# -------------------------------------------------------------------
+
 # Tool 1: Get unread emails
-# -------------------------------------------------------------------
 
 @app.tool()
 def get_unread_emails(max_results: int = 10) -> List[Dict]:
@@ -89,9 +99,7 @@ def get_unread_emails(max_results: int = 10) -> List[Dict]:
     return results
 
 
-# -------------------------------------------------------------------
 # Tool 2: Create a threaded draft reply
-# -------------------------------------------------------------------
 
 @app.tool()
 def create_draft_reply(
@@ -141,9 +149,7 @@ def create_draft_reply(
     }
 
 
-# -------------------------------------------------------------------
 # Entry point
-# -------------------------------------------------------------------
 
 if __name__ == "__main__":
     app.run()
