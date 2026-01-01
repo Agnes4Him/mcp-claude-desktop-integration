@@ -3,7 +3,7 @@ from google.oauth2.credentials import Credentials
 from google.auth.transport.requests import Request
 import os
 
-SCOPES = [
+DOCS_SCOPES = [
     "https://www.googleapis.com/auth/documents.readonly",
 ]
 
@@ -14,7 +14,7 @@ TOKEN_FILE = os.path.join(BASE_DIR, "token.json")
 def get_docs_service():
     creds = Credentials.from_authorized_user_file(
         TOKEN_FILE,
-        scopes=SCOPES
+        scopes=DOCS_SCOPES
     )
 
     if creds.expired and creds.refresh_token:
