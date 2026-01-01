@@ -476,6 +476,7 @@ dependencies = [
     { name = "google-auth" },
     { name = "google-auth-oauthlib" },
     { name = "mcp", extra = ["cli"] },
+    { name = "python-dotenv" },
 ]
 
 [package.metadata]
@@ -484,6 +485,7 @@ requires-dist = [
     { name = "google-auth", specifier = ">=2.45.0" },
     { name = "google-auth-oauthlib", specifier = ">=1.2.2" },
     { name = "mcp", extras = ["cli"], specifier = ">=1.25.0" },
+    { name = "python-dotenv", specifier = ">=1.2.1" },
 ]
 
 [[package]]
