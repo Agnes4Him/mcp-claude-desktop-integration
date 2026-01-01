@@ -7,11 +7,11 @@ The steps taken in the implementation of the project are as stated below:
 * The MCP server was created using Python MCP SDK and with a modular approach
 
 * The server contains 3 tools:
-- get_unread_emails
+1. get_unread_emails
 
-- fetch_email_style_guide
+2. fetch_email_style_guide
 
-- create_draft_reply
+3. create_draft_reply
 
 * All helper functions, utilities and services are in their appropriate directories within `src`
 
@@ -29,11 +29,11 @@ The steps taken in the implementation of the project are as stated below:
 5. python-dotenv
 
 * On the `Google Console`, a new OAUTH Client was created with the following accesses:
-- gmail.readonly
+1. gmail.readonly
 
-- gmail.compose
+2. gmail.compose
 
-- documents.readonly
+3. documents.readonly
 
 * The generated credentials were downloaded and saved in the file `credentials.json`, stored with `src/auth`
 
